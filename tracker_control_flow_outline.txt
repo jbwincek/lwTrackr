@@ -1,4 +1,6 @@
 Tracker control flow outline 
+
+  Psuedo code to describe the highest level 
 Launch:
 	intro messages
 	prompt user for unique identifier 
@@ -19,7 +21,8 @@ Launch:
 				then break
 			other wise deal with their bad input data entry 
 			
-			
+
+  This treats the database as a dictionary 		
 Tracker control flow outline
 Launch():
 	open_database()
@@ -43,15 +46,18 @@ Launch():
 				deal_with_poor_choice()				
 	close_database()
 
+  This abstracts the database away behind a class (OOP)
 Tracker control flow outline
 Launch():
-	database = open_database()
+	database = Database()
+	database.load()
 	print (greeting())
 	input(unique_ID)
 	if !database.user_exists(unique_ID):
 		database.add_user(unique_ID)
-	input(action):
-		while running:
+	while running:
+		input(action):
+			parse_input_for_(action)
 			print( action_menu())
 			if action == display:
 				database.display(unique_ID)
@@ -64,4 +70,5 @@ Launch():
 			else:
 				deal_with_poor_choice()				
 	database.close()
+	close_application()
 				
