@@ -1,0 +1,67 @@
+Tracker control flow outline 
+Launch:
+	intro messages
+	prompt user for unique identifier 
+		if the user already exist: pass
+		else: 
+			add a new entry to the database
+			tell the user a new entry has been added
+	prompt the user for actions they would like to do 
+		start a while loop that is broken out of on valid data entry
+			if they choose display action: 
+				call the display function for their database entry
+				then break
+			if they choose add action:
+				call the add  an entry function for their database entry
+				then break
+			if they choose the modify action:
+				call the modify an entry function for their database entry
+				then break
+			other wise deal with their bad input data entry 
+			
+			
+Tracker control flow outline
+Launch():
+	open_database()
+	print (greeting())
+	input(unique_ID)
+	if !user_database[unique_ID]:
+		user_database[unique_ID] = user.new()
+		print(sucessful_user_add())
+	input(action):
+		while running:
+			print( action_menu())
+			if action == display:
+				print( str( user_database[unique_ID]))
+			else if action == add: 
+				user_database[unique_ID].ad   d_entry()
+			else if action == modify:
+				user_database[unique_ID].modify_entry()
+			else if action == exit: 
+				exit_operations()
+			else:
+				deal_with_poor_choice()				
+	close_database()
+
+Tracker control flow outline
+Launch():
+	database = open_database()
+	print (greeting())
+	input(unique_ID)
+	if !database.user_exists(unique_ID):
+		database.add_user(unique_ID)
+	input(action):
+		while running:
+			print( action_menu())
+			if action == display:
+				database.display(unique_ID)
+			else if action == add: 
+				database.add_entry(unique_ID)
+			else if action == modify:
+				database.modify_entry(unique_ID)
+			else if action == exit: 
+				running = False
+			else:
+				deal_with_poor_choice()				
+	database.close()
+				
