@@ -37,7 +37,7 @@ Launch():
 			if action == display:
 				print( str( user_database[unique_ID]))
 			else if action == add: 
-				user_database[unique_ID].ad   d_entry()
+				user_database[unique_ID].add_entry()
 			else if action == modify:
 				user_database[unique_ID].modify_entry()
 			else if action == exit: 
@@ -51,22 +51,24 @@ Tracker control flow outline
 Launch():
 	database = Database()
 	database.load()
-	print (greeting())
-	input(unique_ID)
-	if !database.user_exists(unique_ID):
+	greeting()
+	unique_ID = get_ID()
+	if not database.user_exists(unique_ID):
 		database.add_user(unique_ID)
 	while running:
-		input(action):
-			parse_input_for_(action)
-			print( action_menu())
-			if action == display:
+		display_action_menu()
+		action = get_action():
+		while True:
+			if action == 'display':
 				database.display(unique_ID)
-			else if action == add: 
+			else if action == 'add': 
 				database.add_entry(unique_ID)
-			else if action == modify:
+			else if action == 'modify':
 				database.modify_entry(unique_ID)
-			else if action == exit: 
-				running = False
+			else if action == 'delete':
+				database.delete_entry(unique_ID)
+			else if action == 'exit': 
+				break
 			else:
 				deal_with_poor_choice()				
 	database.close()
