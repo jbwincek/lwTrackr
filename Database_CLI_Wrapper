@@ -1,0 +1,4 @@
+"""
+Database_CLI Wrapper.py
+Contains functions useful for getting user input in a command line interface setting
+"""

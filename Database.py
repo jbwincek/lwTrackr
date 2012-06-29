@@ -36,10 +36,34 @@ class Database:
 			return False 
 		
 	
-	def add_entry(unique_ID): pass
+	def add_entry(unique_ID):
+		"""
+		These functions will need to prompt the user for information
+			asks for the value of the entry to enter, and any label
+			
+			I could make appendEntry except arbitrarily long lists of input, in case the user wants that
+		"""
+		## get value
+		## get label
+		try:
+			data[unique_ID].appendEntry(value,label)
+		except InvalidInput:
+			#deal with bad input
 	
-	def modify_entry(unique_ID): pass
-	
+	def modify_entry(unique_ID): 
+		"""
+		These functions will need to prompt the user for information
+			asks for the value of the entry to enter, and any label
+		"""
+		## get which entry to modify
+		## get value
+		## get label
+		## ask if they want the current or original time
+		try:
+			data[unique_ID].modifyEntry(index,value,label,time)
+		except InvalidInput:
+			#deal with bad input
+		
 	def delete_entry(unique_ID): pass
 	
 	def save(file_choice= file):
