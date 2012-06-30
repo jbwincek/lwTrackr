@@ -50,7 +50,7 @@ Launch():
 Tracker control flow outline
 Launch():
 	database = Database()
-	database.load()
+	database.load(<filename>)
 	greeting()
 	unique_ID = get_ID()
 	if not database.user_exists(unique_ID):

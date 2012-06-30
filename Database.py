@@ -8,6 +8,17 @@ Currently the plan is to store everything in a dictionary using the unique_ID as
 
 This file should also include methods for user input and display
 	eventually just import those functions from somewhere
+
+Database control flow: 
+	* database gets init'ed 
+		* that sets up the file and dictionary to store the data
+	* database.load is called
+		* try to open the file (either specified or not)
+		* except file error, prompt the user to select another file. 
+			then recall load with the new filename
+		* else
+			* pass the file data into the dictionary
+
 """
 
 class Database: 
