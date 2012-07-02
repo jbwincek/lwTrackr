@@ -33,7 +33,8 @@ def get_entry_item_modify(): pass
 
 def delete_entry_(): pass
 
-def handle_input(action,needed_entries): pass
+def evaluate_action(action,unique_ID):
+	print (" %s choosen for user %s" % (action,unique_ID))
 
 
 	

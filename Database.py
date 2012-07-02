@@ -1,5 +1,5 @@
 import mood as IM
-import Database_CLI_Wrapper as Wrapper
+import Database_CLI_Wrapper as CLI
 """
 The database module
 The database class represents contains all of the users and all of their entries
@@ -23,9 +23,8 @@ Database control flow:
 """
 
 class Database: 
-	
+	data = {}
 	def __init__(self,*args): 
-		data = []
 		file="tracker_data.jbw"
 	
 	def load(file_choice = file): 
@@ -38,14 +37,20 @@ class Database:
 
 		pass
 	
-	def user_exists(unique_ID):
+	def user_exists(self,unique_ID):
 		"""
 		Boolean function checking to see if the user exists
 		"""
-		if not data[unique_ID]:
+		try:
+			self.data[unique_ID]
+		except KeyError:
+			return False
+		else:
 			return True
-		else: 
-			return False 
+		
+		
+		
+		
 		"""
 		The following three functions could potentially be broken down into two parts
 			1.) get the data
