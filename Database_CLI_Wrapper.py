@@ -25,7 +25,7 @@ Plan:
 """
 
 
-
+def display_all(unique_ID): pass
 
 def get_entry_item_add(): pass
 

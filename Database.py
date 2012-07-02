@@ -24,8 +24,11 @@ Database control flow:
 
 class Database: 
 	data = {}
-	def __init__(self,*args): 
+	action_table = {}
+	
+	def __init__(self,order,*args): 
 		file="tracker_data.jbw"
+		order = {'display_all':CLI.display_all,'add':CLI.add_entry ,'modify':CLI.modify_entry ,'delete':CLI.delete_entry,'quit':quit]
 	
 	def load(file_choice = file): 
 		"""
@@ -51,21 +54,24 @@ class Database:
 		
 		
 		
-		"""
-		The following three functions could potentially be broken down into two parts
-			1.) get the data
-			2.) use the data
-		"""
+"""
+The following three functions could potentially be broken down into two parts
+	1.) get the data -- this part has been moved into Database_CLI_Wrapper
+	2.) use the data
+	    * this step means interfacing with the instance of the Mood class keyed by the unique_ID in the data dictionary
+	    * mood class has these relevant functions:
+	    	* appendEntry(value,label='') 
+	    	* modifyEntry(self,index, value, label = '', updateTime=True)
+	    	* WARNING: deleteEntry is currently unimplemented
+	    	* WARNING: returnEntryAsString is currently unimplemented
+"""
 	
-	def add_entry(unique_ID):
+	def add_entry(unique_ID,value,label):
 		"""
-		These functions will need to prompt the user for information
-			asks for the value of the entry to enter, and any label
-			
-			I could make appendEntry except arbitrarily long lists of input, in case the user wants that
+		Takes well formatted input and operates on the database with it
+		
+		WARNING: this isn't using the mood class at all
 		"""
-		## get value
-		## get label
 		try:
 			data[unique_ID].appendEntry(value,label)
 		except InvalidInput:
@@ -94,5 +100,6 @@ class Database:
 			file = file_choice
 	
 	def close(): pass
+	
 	
 	

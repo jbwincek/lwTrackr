@@ -57,7 +57,12 @@ class Mood:
 				raise InvalidInput
 		else:
 			raise InvalidInput
+	def deleteEntry(self, index):
+		pass
 	
+	def returnEntryAsString(self,index:
+		pass
+
 		
 	def inputIsValid(self,value, label):
 		# this function should go with addEntry
