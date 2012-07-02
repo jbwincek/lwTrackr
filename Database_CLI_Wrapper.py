@@ -19,8 +19,21 @@ Plan:
    then in the handle the for loop would call the appropriate get_entry_item_<action>()
      for each type of entry datapoint to handle
      This would allow for code reuse, even if it looks kinda complicated.
+     the needed_entries might not be needed actually
      
    
 """
 
-def handle
+
+
+
+def get_entry_item_add(): pass
+
+def get_entry_item_modify(): pass
+
+def delete_entry_(): pass
+
+def handle_input(action,needed_entries): pass
+
+
+	

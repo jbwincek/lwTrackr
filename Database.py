@@ -1,4 +1,5 @@
 import mood as IM
+import Database_CLI_Wrapper as Wrapper
 """
 The database module
 The database class represents contains all of the users and all of their entries
@@ -23,7 +24,7 @@ Database control flow:
 
 class Database: 
 	
-	def __init__: 
+	def __init__(self,*args): 
 		data = []
 		file="tracker_data.jbw"
 	
@@ -45,7 +46,11 @@ class Database:
 			return True
 		else: 
 			return False 
-		
+		"""
+		The following three functions could potentially be broken down into two parts
+			1.) get the data
+			2.) use the data
+		"""
 	
 	def add_entry(unique_ID):
 		"""
@@ -60,7 +65,8 @@ class Database:
 			data[unique_ID].appendEntry(value,label)
 		except InvalidInput:
 			#deal with bad input
-	
+			pass
+		
 	def modify_entry(unique_ID): 
 		"""
 		These functions will need to prompt the user for information
@@ -74,6 +80,7 @@ class Database:
 			data[unique_ID].modifyEntry(index,value,label,time)
 		except InvalidInput:
 			#deal with bad input
+			pass
 		
 	def delete_entry(unique_ID): pass
 	
