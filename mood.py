@@ -60,7 +60,7 @@ class Mood:
 	def deleteEntry(self, index):
 		pass
 	
-	def returnEntryAsString(self,index:
+	def returnEntryAsString(self,index):
 		pass
 
 		

@@ -58,19 +58,19 @@ def get_ID():
 	unique_ID = raw_input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
 	return unique_ID
 
-def display_action_menu(order,action_text):
+def display_action_menu(table):
 	"""
 	This action menu could be updated to be represented as a list of strings for each action
 		that would allow easier adding and indexing of actions to help make parse_input_from()
 		more robust
 	"""
 	print ("			Action Menu\n\nPlease choose an action by entering the corresponding number")
-	for i in range(0,len(order)): 
-		display_action_menu_item(order,action_text,i)
+	for i in range(0,len(action_table)): 
+		display_action_menu_item(action_table,i)
 		
 
-def display_action_menu_item(order,action_text,index):
-	print ( '   %d.)  %s.' % (index, action_text[order[index]]))
+def display_action_menu_item(action_table,index):
+	print ( '   %d.)  %s.' % (index, action_table[1]))
 
 
 def get_action(action_text):
@@ -111,8 +111,11 @@ def parse_input_from(unclean_action, action_text):
 		return int(action)
 
 
-def action_converter():
-	pass
+def action_converter(int_action):
+	action = '' 
+	
+	
+	return action
 def build_action_table(action,order):
 	"""
 	accepts a clean well formatted action integer 

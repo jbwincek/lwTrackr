@@ -1,12 +1,9 @@
-import mood as IM
-import Database_CLI_Wrapper as CLI
 """
 The database module
 The database class represents contains all of the users and all of their entries
 
 Currently the plan is to store everything in a dictionary using the unique_ID as a key
 	and the value as a instance of the Mood class.
-
 This file should also include methods for user input and display
 	eventually just import those functions from somewhere
 
@@ -20,7 +17,19 @@ Database control flow:
 		* else
 			* pass the file data into the dictionary
 
+The  three functions modify, add, delete are in the process of being broken down into two parts
+	1.) get the data -- this part has been moved into Database_CLI_Wrapper
+	2.) use the data
+	    * this step means interfacing with the instance of the Mood class keyed by the unique_ID in the data dictionary
+	    * mood class has these relevant functions:
+	    	* appendEntry(value,label='') 
+	    	* modifyEntry(self,index, value, label = '', updateTime=True)
+	    	* WARNING: deleteEntry is currently unimplemented
+	    	* WARNING: returnEntryAsString is currently unimplemented
+
 """
+import mood as IM
+import database_CLI_wrapper as CLI
 
 class Database: 
 	data = {}
@@ -28,7 +37,16 @@ class Database:
 	
 	def __init__(self,order,*args): 
 		file="tracker_data.jbw"
-		order = {'display_all':CLI.display_all,'add':CLI.add_entry ,'modify':CLI.modify_entry ,'delete':CLI.delete_entry,'quit':quit]
+		action_table = {'display_all':CLI.display_all,'add':CLI.add_entry ,'modify':CLI.modify_entry ,'delete':CLI.delete_entry,'quit':self.quit}
+	
+	def action_interface(self, action, *args):
+		"""
+		needs action as a string
+		"""
+		try:
+			self.action_table[action](*args)
+		except KeyError:
+			print('this error should never be encountered, an errant action slipped into the database')
 	
 	def load(file_choice = file): 
 		"""
@@ -37,7 +55,6 @@ class Database:
 		"""
 		if file_choice!=file:
 			file = file_choice
-
 		pass
 	
 	def user_exists(self,unique_ID):
@@ -50,21 +67,6 @@ class Database:
 			return False
 		else:
 			return True
-		
-		
-		
-		
-"""
-The following three functions could potentially be broken down into two parts
-	1.) get the data -- this part has been moved into Database_CLI_Wrapper
-	2.) use the data
-	    * this step means interfacing with the instance of the Mood class keyed by the unique_ID in the data dictionary
-	    * mood class has these relevant functions:
-	    	* appendEntry(value,label='') 
-	    	* modifyEntry(self,index, value, label = '', updateTime=True)
-	    	* WARNING: deleteEntry is currently unimplemented
-	    	* WARNING: returnEntryAsString is currently unimplemented
-"""
 	
 	def add_entry(unique_ID,value,label):
 		"""
@@ -100,6 +102,5 @@ The following three functions could potentially be broken down into two parts
 			file = file_choice
 	
 	def close(): pass
-	
 	
 	
