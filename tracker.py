@@ -1,8 +1,13 @@
 """ 
 main execution loop
 
-action_table follows the format: 
-  * key : index, text to display, function to execute 
+action_list follows the format: 
+  * [ action name, action descriptor text, a function]   
+  
+  
+  LOTS OF VARIABLES HAVE CHANGED NAMES, MAKE SURE THOSE PROPOGATE CORRECTLY 
+    * the object formerly known as action_text, became action_table then action_list
+  
 """
 import tracker_wrapper as CLI, Database as db
 
@@ -21,6 +26,8 @@ wtp = 2
 # print the action name based off of an index number
 print [x[2] for x in action_list][wtp]([x[0] for x in action_list][wtp])
 
+print action_list[wtp][2](action_list[wtp][0])
+
 
 
 def launch():
@@ -32,8 +39,8 @@ def launch():
 		print "welcome back"
 	else:
 		print "greetings new user"
-	CLI.display_action_menu(action_table)
-	action = CLI.get_action(action_table)
+	CLI.display_action_menu(action_list)
+	action = CLI.get_action(action_list)
 	#database.build_action_table(order)
 	#db.CLI.evaluate_action(action,unique_ID,order)
 

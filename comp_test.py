@@ -13,3 +13,4 @@ wtp = 2
 # print the action name based off of an index number
 print [x[2] for x in action_list][wtp]([x[0] for x in action_list][wtp])
 
+print action_list[wtp][2](action_list[wtp][0])

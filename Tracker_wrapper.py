@@ -39,7 +39,7 @@ deal_with_poor_choice(action_text):
 if function names in Database.py change, be sure to update the action_handler(action,order) table
 """
 
-
+import pydoc
 def greeting(versionNumber): 
 	print( """
 		Welcome to the tracker app version: %s
