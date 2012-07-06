@@ -1,5 +1,11 @@
 """ 
-main execution loop
+Main execution loop for lwTrackr
+
+Copyright 2012 J. B. Wincek 
+GNU General Public License ver 3. 
+written by J. B. Wincek
+
+
 
 action_list follows the format: 
   * [ action name, action descriptor text, a function]   
