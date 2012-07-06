@@ -40,16 +40,19 @@ if function names in Database.py change, be sure to update the action_handler(ac
 """
 
 import pydoc
+
+def PoorChoice:
+	# except for dealing with poor choices 
+	def __init__(self, attempted_text, reason):
+		self.attempted_text = attempted_text
+		self.reason = reason
+
 def greeting(versionNumber): 
 	print( """
 		Welcome to the tracker app version: %s
 			By J B Wincek
 			
 """ % (versionNumber))
-
-def deal_with_poor_choice(action_text):
-	print("We're sorry that text was in some way not able to be intepereted please try again")
-	get_action(action_text)
 	
 def close_application(): quit()
 
@@ -58,64 +61,69 @@ def get_ID():
 	unique_ID = raw_input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
 	return unique_ID
 
-def display_action_menu(table):
+def display_action_menu(action_list):
 	"""
-	This action menu could be updated to be represented as a list of strings for each action
-		that would allow easier adding and indexing of actions to help make parse_input_from()
-		more robust
+	uses the text in the action list to build a text based menu for the user
+	
 	"""
-	print ("			Action Menu\n\nPlease choose an action by entering the corresponding number")
-	for i in range(0,len(action_table)): 
-		display_action_menu_item(action_table,i)
+	print ("\t\t\tAction Menu\n\nPlease choose an action by entering the corresponding number")
+	print_list = [x[1] for x in action_list]
+	for i in range(0,len(print_list)): 
+		# pass the human readable action description
+		display_action_menu_item(print_list[i],i)
 		
 
-def display_action_menu_item(action_table,index):
-	print ( '   %d.)  %s.' % (index, action_table[1]))
+def display_action_menu_item(description,action_number):
+	print ( '   %d.)  %s.' % (action_number, description))
 
 
-def get_action(action_text):
+def get_action(action_list):
+	"""
+	Takes user input as an action, treats that input as unclean
+	The prompt is very short because display_action_menu() builds most of the actual prompt 
+	parse_input_from() returns the action as an integer corrosponding to the index of the action
+	"""
 	unclean_action = raw_input(": ")
-	# the action NEEDS to be cleaned up before this can go primetime
-	action = parse_input_from(unclean_action,action_text)
+	try:
+		action = parse_input_from(unclean_action,action_list)
+	except PoorChoice,PC:
+		deal_with_poor_choice(PC.attempted_text,PC.reason)
 	return action
 
-def parse_input_from(unclean_action, action_text): 
+def parse_input_from(unclean_action, action_list): 
 	"""
-  * This is currently an INCOMPLETE function, NEED complete the parsing methods
-  * try to parse parse input if it can't parse the input to anything 
-  	useful, then call deal_with_poor_choice() 
-  	  ERROR: currently this attempt will fail every time, action_text uses words to describe an
-  	  but it is attempted with an number
+  * This parsing may have some holes in it, but generally it should clean most things
+  * try to parse parse input if it can't parse the input to anything useful, 
+    then raise a PoorChoice exception
   * takes an unclean input as a string representing a number
-  * cleaned_action holds the text that gets cleaned
+  * cleaned_action holds the text while it's being cleaned
   * returns a number to be used as the index of the action described by order
 	"""
-	cleaned_action = ''
-	cleaned_action = unclean_action.strip()
-	cleaned_action = cleaned_action.lower()
-	try:
-		# THIS NEEDS TO BE CHANGED (see comment at top) 
-		action_text[unclean_action]
-	except KeyError:
-		#deal with more complicated parsing
-		if unclean_action.isdigit():
-			if int(unclean_action) > len(action_text) or int(unclean_action) < 0:
-				# out of bounds check
-				deal_with_poor_choice(action_text)
-			else: 
-				# unclean_action has been successfully cleaned
-				cleaned_action = unclean_action
-				
-		else: print( 'outer if ')
+	cleaning_action = unclean_action.strip()
+	cleaning_action = cleaning_action.lower()
+	if cleaning_action.isdigit():
+		if int(cleaning_action) > len(action_list) or int(cleaning_action) < 0:
+			# out of bounds check
+			raise PoorChoice(unclean_action,'out of bounds')
+		else: 
+			# unclean_action has been successfully cleaned
+			cleaned_action = cleaning_action 
 	else:
-		return int(action)
+		raise PoorChoice(unclean_action,'not a valid option')
+	return int(cleaned_action)
 
+def deal_with_poor_choice(attempted_text,reason):
+	print( "%s is %s. Please enter one of the listed numbers." % (attempted_text,reason))
+	get_action(action_text)
 
-def action_converter(int_action):
-	action = '' 
+def action_converter(int_action, action_list):
+	"""
+	converts integer based action representations into string form 
+	ie 1 goes to 'add'
+	BE CAREFUL: this does not check the passed in variables at all
+	"""
+	return action_list[int(int_action)][0]
 	
-	
-	return action
 def build_action_table(action,order):
 	"""
 	accepts a clean well formatted action integer 

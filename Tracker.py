@@ -38,7 +38,7 @@ print action_list[wtp][2](action_list[wtp][0])
 
 def launch():
 	running = True 
-	database = db.Database(order)
+	database = db.Database(action_list)
 	CLI.greeting(versionNumber)
 	unique_ID = CLI.get_ID()
 	if database.user_exists(unique_ID):

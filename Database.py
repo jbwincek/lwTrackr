@@ -33,12 +33,22 @@ import database_CLI_wrapper as CLI
 
 class Database: 
 	data = {}
-	action_table = {}
+	action_table = {
+					'display_all':CLI.display_all,
+					'add':CLI.add_entry,
+					'modify':CLI.modify_entry,
+					'delete':CLI.delete_entry,
+					'quit':self.quit }
+	action_list = []
 	
-	def __init__(self,order,*args): 
+	def __init__(self,action_list,*args): 
 		file="tracker_data.jbw"
-		action_table = {'display_all':CLI.display_all,'add':CLI.add_entry ,'modify':CLI.modify_entry ,'delete':CLI.delete_entry,'quit':self.quit}
+		self.action_list = action_list
+		# for all the actions in the list pair them with appropriate functions from the table
+		for actions in range(0,len(self.action_list)):
+			self.action_list[actions][2] = self.action_table[self.action_list[actions][0]]
 	
+		
 	def action_interface(self, action, *args):
 		"""
 		needs action as a string

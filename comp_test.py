@@ -1,4 +1,4 @@
-""" comprehensions test"""
+""" comprehensions  and other things test"""
 def func(test):
 	return test
 action_list = [
@@ -6,11 +6,44 @@ action_list = [
 ['add', 'Add a new entry', func ],
 ['modify', 'Modify an existing entry', func],
 ['delete', 'Delete an entry', func ],
-['quit', 'Quit the program', func ] 
-]
+['quit', 'Quit the program', func ] ]
 wtp = 2
 
-# print the action name based off of an index number
-print [x[2] for x in action_list][wtp]([x[0] for x in action_list][wtp])
+#  pass the action name to the function for that action
+#print [x[2] for x in action_list][wtp]([x[0] for x in action_list][wtp])
+#print action_list[wtp][2](action_list[wtp][0])
 
-print action_list[wtp][2](action_list[wtp][0])
+def display_all():
+	print 'displayed everything'
+def add_entry():
+	print 'added an entry'
+def modify_entry():
+	print 'modified an entry'
+def delete_entry():
+	print 'deleted an entry'
+def quitter():
+	print 'quiting'
+
+action_table = {
+				'display_all':display_all,
+				'add':add_entry,
+				'modify':modify_entry,
+				'delete':delete_entry,
+				'quit':quitter }
+
+class PoorChoice: pass
+
+def raises_PoorChoice():
+	raise PoorChoice
+
+for actions in range(0,len(action_list)):
+	action_list[actions][2] = action_table[action_list[actions][0]]
+	
+#print action_list
+
+#print [x[1] for x in action_list]
+
+try: 
+	raises_PoorChoice()
+except PoorChoice:
+	print 'exception caught'
