@@ -10,7 +10,8 @@ Variables:
   * unclean_action: the user input represented as a number corresponding to the
   	index of an action described in order
   * versionNumber: a string representing the version
-  * order: a list of actions, used to describe the order to present them to the user in
+  * OUTDATED: order: a list of actions, used to describe the order to present
+	them to the user in
 
 greeting(versionNumber):
   * prints the welcoming text with the versionNumber in it 
@@ -21,18 +22,23 @@ get_ID():
 
 parse_input_from(unclean_action,action_text)
   * tries to clean the user entered action to make it match an existing action 
-  * if that is impossible call deal_with_poor_choice(action_text) to handle what to do next
+  * if that is impossible call deal_with_poor_choice(action_text) to handle
+  	what to do next
 
 display_action_menu(order,action_text)
-  * prints general text used to describe available actions to the user and how to input them 
-  * calls diplay_action_menu_item(order,action_text,<current index>) to display each individual item
+  * prints general text used to describe available actions to the user and how
+	to input them 
+  * calls diplay_action_menu_item(order,action_text,<current index>) to display
+	each individual item
 
 display_action_menu_item(order,action_text,index):
-  * uses the variables passed to print a well formatted string that describes the action to the user
+  * uses the variables passed to print a well formatted string that describes
+	the action to the user
 
 get_action(action_text):
   * prompts the user for an action
-  * uses parse_input_from(unclean_action,action_text) attempt to to clean the action 
+  * uses parse_input_from(unclean_action,action_text) attempt to to clean the
+  	action 
   * returns a cleaned action
 
 deal_with_poor_choice(action_text):
