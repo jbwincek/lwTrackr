@@ -2,6 +2,8 @@
 tracker_wrapper
 example change
 
+A module to utilize the command line interface to access the database.
+
 Variables:
   * OUTDATED: action_text: a dictionary that maps short textual representations
   	of actions onto  longer descriptive text
