@@ -38,7 +38,7 @@ class Database:
 					'add':CLI.add_entry,
 					'modify':CLI.modify_entry,
 					'delete':CLI.delete_entry,
-					'quit':self.quit }
+					'quit':CLI.close }
 	action_list = []
 	
 	def __init__(self,action_list,*args): 
@@ -83,6 +83,8 @@ class Database:
 		Takes well formatted input and operates on the database with it
 		
 		WARNING: this isn't using the mood class at all
+		^ This warning can be fixed by replacing the data[uni.... line
+		with an appropriate call to a field instance 
 		"""
 		try:
 			data[unique_ID].appendEntry(value,label)
@@ -110,7 +112,7 @@ class Database:
 	def save(file_choice= file):
 		if file_choice!=file:
 			file = file_choice
+		pass 
 	
-	def close(): pass
 	
 	

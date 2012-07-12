@@ -27,11 +27,13 @@ Plan:
 
 def display_all(unique_ID): pass
 
-def get_entry_item_add(): pass
+def add_entry(): pass
 
-def get_entry_item_modify(): pass
+def modify_entry(): pass
 
-def delete_entry_(): pass
+def delete_entry(): pass
+
+def close(): pass
 
 def evaluate_action(action,unique_ID):
 	print (" %s choosen for user %s" % (action,unique_ID))

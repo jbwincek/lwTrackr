@@ -3,9 +3,12 @@ tracker_wrapper
 example change
 
 Variables:
-  * action_text: a dictionary that maps short textual representations of actions onto  longer descriptive text
-  * action: a short string representation of an action with no capitals or non-alpha characters
-  * unclean_action: the user input represented as a number corresponding to the index of an action described in order
+  * OUTDATED: action_text: a dictionary that maps short textual representations
+  	of actions onto  longer descriptive text
+  * action: a short string representation of an action with no capitals or 
+  	non-alpha characters
+  * unclean_action: the user input represented as a number corresponding to the
+  	index of an action described in order
   * versionNumber: a string representing the version
   * order: a list of actions, used to describe the order to present them to the user in
 
@@ -41,7 +44,7 @@ if function names in Database.py change, be sure to update the action_handler(ac
 
 import pydoc
 
-def PoorChoice:
+def PoorChoice():
 	# except for dealing with poor choices 
 	def __init__(self, attempted_text, reason):
 		self.attempted_text = attempted_text
