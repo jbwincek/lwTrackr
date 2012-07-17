@@ -22,22 +22,22 @@ get_ID():
   * asks the user for there ID
   * returns their input exactly without any cleaning
 
-parse_input_from(unclean_action,action_text)
+parse_input_from(unclean_action,action_list)
   * tries to clean the user entered action to make it match an existing action 
   * if that is impossible call deal_with_poor_choice(action_text) to handle
   	what to do next
 
-display_action_menu(order,action_text)
+display_action_menu(action_list)
   * prints general text used to describe available actions to the user and how
 	to input them 
   * calls diplay_action_menu_item(order,action_text,<current index>) to display
 	each individual item
 
-display_action_menu_item(order,action_text,index):
+display_action_menu_item(description,action_number):
   * uses the variables passed to print a well formatted string that describes
 	the action to the user
 
-get_action(action_text):
+get_action(action_list):
   * prompts the user for an action
   * uses parse_input_from(unclean_action,action_text) attempt to to clean the
   	action 
@@ -47,7 +47,8 @@ deal_with_poor_choice(action_text):
   * tells the user that the input was uninterpretable 
   * calls get_action(action_text) again
 
-if function names in Database.py change, be sure to update the action_handler(action,order) table
+if function names in Database.py change, be sure to update the 
+	action_handler(action,order) table
 """
 
 import pydoc
@@ -68,6 +69,11 @@ def greeting(versionNumber):
 def close_application(): quit()
 
 def get_ID():
+	"""
+	get_ID():
+	  * asks the user for there ID
+  	  * returns their input exactly without any cleaning
+	"""	
 	# pretty self explanatoy
 	unique_ID = raw_input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
 	return unique_ID
@@ -92,7 +98,7 @@ def get_action(action_list):
 	"""
 	Takes user input as an action, treats that input as unclean
 	The prompt is very short because display_action_menu() builds most of the actual prompt 
-	parse_input_from() returns the action as an integer corrosponding to the index of the action
+	parse_input_from() returns the action as an integer corresponding to the index of the action
 	"""
 	unclean_action = raw_input(": ")
 	try:
@@ -129,9 +135,9 @@ def deal_with_poor_choice(attempted_text,reason):
 
 def action_converter(int_action, action_list):
 	"""
-	converts integer based action representations into string form 
-	ie 1 goes to 'add'
-	BE CAREFUL: this does not check the passed in variables at all
+  * converts integer based action representations into string form 
+  	ie 1 goes to 'add'
+  * BE CAREFUL: this does not check the passed in variables at all
 	"""
 	return action_list[int(int_action)][0]
 	
@@ -140,6 +146,7 @@ def build_action_table(action,order):
 	accepts a clean well formatted action integer 
 	Then calls the appropriate database function	
 	"""
+	pass
 	
 	
 

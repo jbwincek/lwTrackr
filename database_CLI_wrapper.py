@@ -24,19 +24,132 @@ Plan:
    
 """
 
+# user related methods
+def add_user(): 
+	"""
+	* Display that we are adding a user
+	* get the raw input 
+	* parse the raw input 
+	* return the well formatted unique_ID to be added
+	"""
+	message = {
+				'title' : '~-~-~ ADD USER ~-~-~',
+				'body' : 'Please enter a user ID',
+				'prompt' : '>'} 
+	unclean_unique_ID = _prompt(message)
+	unique_ID = _clean(unclean_unique_ID)
+	return unique_ID
+	
+def delete_user():	
+	"""
+	* Display that we are deleting  a user
+	* get the raw input 
+	* parse the raw input 
+	* return the well formatted unique_ID to be deleted
+	"""
+	message = {
+				'title' : '~-~-~ DELETE USER ~-~-~',
+				'body' : 'Please enter a user ID',
+				'prompt' : '>'} 
+	unclean_unique_ID =  _prompt(message)
+	unique_ID = _clean(unclean_unique_ID)
+	return unique_ID
 
-def display_all(unique_ID): pass
+#field related methods
+def create_new_field(unique_ID): 
+	"""
+	get the field name from the wrapper
+	#creates an instance of the Field class in unique_ID's storage area. 
+	"""
+	message = {
+				'title' : '~-~-~ CREATE A NEW FIELD ~-~-~',
+				'body' : 'Please enter a field name',
+				'prompt' : '>'} 
+	unclean_field_name =  _prompt(message)
+	field_name = _clean(unclean_field_name)
+	return field_name
 
-def add_entry(): pass
 
-def modify_entry(): pass
+def list_current_fields(unique_ID, fields): 
+	"""
+	List all fields that exist in unique_ID's storage area.
+	get's a list of fields passed to it. 
+	"""
+	display_text = '~-~-~ THE CURRENT FIELDS ~-~-~\n\t'
 
-def delete_entry(): pass
+	for field in fields: 
+		display_text.append(str(field) + '\n\t')
+	print display_text
+	return
 
-def close(): pass
+def delete_field(unique_ID): 
+	"""
+	deletes an instance of the Field class in unique_ID's storage area. 
+	"""
+	message = {
+				'title' : '~-~-~ DELETE A NEW FIELD ~-~-~',
+				'body' : 'Please enter a field name',
+				'prompt' : '>'} 
+	return _prompt(message)
 
+def interact_with_field(unique_ID,actions): 
+	"""
+	returns well formated action code add  
+	"""
+	field_message = {
+				'title' : '~-~-~ SELECT A FIELD ~-~-~',
+				'body' : 'Please enter a field name',
+				'prompt' : '>'} 
+	unclean_field_name =  _prompt(message)
+	field_name = _clean(unclean_field_name)
+	action_message = {
+				'title' : '~-~-~ SELECT AN ACTION ~-~-~',
+				'body' : 'Please enter a one of the following actions:',
+				'prompt' : '>'} 
+	for action in actions: 
+		action_message['body'].append("%s\n\t" % action)
+	action = _prompt(message)
+	return action, field_name
+
+#field interactions
+def add_an_entry(unique_ID,field): 
+	#get the value and label from the wrapper
+	#use the data
+	pass
+
+def delete_an_entry(unique_ID,field): 
+	#get which entry to delete from the wrapper
+	#use the data
+	pass
+
+def modify_an_entry(unique_ID,field): 
+	#get the new value, label, and which entry to modify from the wrapper
+	#use the data
+	pass
+	
+	
 def evaluate_action(action,unique_ID):
 	print (" %s choosen for user %s" % (action,unique_ID))
 
-
+#private methods
+def _get_unclean():
+	unique_ID = ''
+	return unique_ID
+	
+def _clean(unclean):
+	#parse unclean until it's consistently clean
+	cleaned = unclean
+	return cleaned
+	
+def _prompt(message):
+	""" Display the message with consistent formatting.
+	Format:
+	
+	The Title Goes Here
+		 Tab over for the body
+	Prompt
+	
+	 """
+	print( '%s\n\t%s' % (message['title'], message['body']))
+	return _clean(raw_input( message['prompt']))
 	
