@@ -1,7 +1,6 @@
 """
-Database test class
-This does not preform testing on the database, instead it is a testing version
-of the Database class
+The Database class is based off of a dictionary and contains all the methods
+	needed for storing, acessing and modifying all the data in the program. 
 """
 import database_CLI_wrapper as wrapper
 import Field
@@ -57,6 +56,11 @@ class Database(dict):
 	#field interactions
 	def add_an_entry(unique_ID,field): 
 		#get the value and label from the wrapper
+		value, label = wrapper.add_an_entry(unique_ID,field)
+		try:
+			self[unique_ID][field].appendEntry(value,label)
+		except InvalidInput: 
+		
 		#use the data
 		pass
 	
@@ -70,7 +74,9 @@ class Database(dict):
 		#use the data
 		pass
 	
-
+	def display_all():
+		#this method is pending review as to it's nessecity
+		
 	
 	
 	

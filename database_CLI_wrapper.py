@@ -21,7 +21,7 @@ Plan:
      This would allow for code reuse, even if it looks kinda complicated.
      the needed_entries might not be needed actually
      
-   
+  Methods intended for internal use begin with a _. Example: _clean()
 """
 
 # user related methods
@@ -36,8 +36,7 @@ def add_user():
 				'title' : '~-~-~ ADD USER ~-~-~',
 				'body' : 'Please enter a user ID',
 				'prompt' : '>'} 
-	unclean_unique_ID = _prompt(message)
-	unique_ID = _clean(unclean_unique_ID)
+	unique_ID = _prompt(message)
 	return unique_ID
 	
 def delete_user():	
@@ -51,8 +50,7 @@ def delete_user():
 				'title' : '~-~-~ DELETE USER ~-~-~',
 				'body' : 'Please enter a user ID',
 				'prompt' : '>'} 
-	unclean_unique_ID =  _prompt(message)
-	unique_ID = _clean(unclean_unique_ID)
+	unique_ID =  _prompt(message)
 	return unique_ID
 
 #field related methods
@@ -65,8 +63,7 @@ def create_new_field(unique_ID):
 				'title' : '~-~-~ CREATE A NEW FIELD ~-~-~',
 				'body' : 'Please enter a field name',
 				'prompt' : '>'} 
-	unclean_field_name =  _prompt(message)
-	field_name = _clean(unclean_field_name)
+	field_name = _prompt(message)
 	return field_name
 
 
@@ -94,42 +91,80 @@ def delete_field(unique_ID):
 
 def interact_with_field(unique_ID,actions): 
 	"""
-	returns well formated action code add  
+	Generalized method for all field interactions, requires a list of available
+	  actions. 
 	"""
 	field_message = {
 				'title' : '~-~-~ SELECT A FIELD ~-~-~',
 				'body' : 'Please enter a field name',
 				'prompt' : '>'} 
-	unclean_field_name =  _prompt(message)
-	field_name = _clean(unclean_field_name)
 	action_message = {
 				'title' : '~-~-~ SELECT AN ACTION ~-~-~',
 				'body' : 'Please enter a one of the following actions:',
 				'prompt' : '>'} 
 	for action in actions: 
-		action_message['body'].append("%s\n\t" % action)
-	action = _prompt(message)
+		action_message['body'].append("\n\t%s" % action)
+	field_name = _prompt(field_message)
+	action = _prompt(action_message)
 	return action, field_name
 
 #field interactions
 def add_an_entry(unique_ID,field): 
-	#get the value and label from the wrapper
-	#use the data
-	pass
-
+	# present the UI to the user to retrieve value and label
+	value_message = {
+				'title' : '~-~-~ ENTER A VALUE ~-~-~',
+				'body' : "Although value can be anything, a decimal number is recommended",
+				'promp' : '>'}
+	
+	label_message = {
+				'title' : '~-~-~ ENTER A LABEL ~-~-~',
+				'body' : 'This will be displayed along side the value.\n Blank is an acceptable option.',
+				'prompt': '>'}
+	
+	value = _prompt(value_message)
+	label = _prompt(label_message)
+	#return the well formatted data
+	return value, label
+	
 def delete_an_entry(unique_ID,field): 
+	"""This method left intentionally blank and should not be used due to how 
+	the values are stored."""
 	#get which entry to delete from the wrapper
 	#use the data
 	pass
 
 def modify_an_entry(unique_ID,field): 
 	#get the new value, label, and which entry to modify from the wrapper
+	# This method abiguously asks which one without clarifying response format. 
+	which_message = {
+				'title' : '~-~-~ MODIFY AN ENTRY ~-~-~',
+				'body' : 'Choose which entry you would to modify',
+				'prompt' : '>'}
+	
+	value_message = {
+				'title' : '~-~-~ ENTER A VALUE ~-~-~',
+				'body' : "Although value can be anything, a decimal number is recommended",
+				'promp' : '>'}
+	
+	label_message = {
+				'title' : '~-~-~ ENTER A LABEL ~-~-~',
+				'body' : 'This will be displayed along side the value.\n Blank is an acceptable option.',
+				'prompt': '>'}
+	
+	which = _prompt(which_method)
+	value = _prompt(value_message)	
+	label = _prompt(label_message)
 	#use the data
-	pass
+	return index, value, label
 	
 	
 def evaluate_action(action,unique_ID):
 	print (" %s choosen for user %s" % (action,unique_ID))
+
+#general public methods
+
+def display_error(reason):
+	
 
 #private methods
 def _get_unclean():
@@ -137,7 +172,8 @@ def _get_unclean():
 	return unique_ID
 	
 def _clean(unclean):
-	#parse unclean until it's consistently clean
+	# parse unclean until it's consistently clean
+	# can raise an InvalidInput error if it's unparsable.  
 	cleaned = unclean
 	return cleaned
 	
@@ -149,6 +185,7 @@ def _prompt(message):
 		 Tab over for the body
 	Prompt
 	
+	 Returns 
 	 """
 	print( '%s\n\t%s' % (message['title'], message['body']))
 	return _clean(raw_input( message['prompt']))

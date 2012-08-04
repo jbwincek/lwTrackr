@@ -28,11 +28,6 @@ action_list = [
 ['quit', 'Quit the program', func ] 
 ]
 
-wtp = 2
-
-#print action_list[wtp][2](action_list[wtp][0])
-
-
 
 def launch(action_list):
 	running = True 
