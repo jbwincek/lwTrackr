@@ -64,6 +64,7 @@ def greeting(versionNumber):
 		Welcome to the tracker app version: %s
 			By J B Wincek
 			
+		This program autosaves so ctrl + C is an acceptable way to exit. 
 """ % (versionNumber))
 	
 def close_application(): quit()
@@ -76,6 +77,11 @@ def get_ID():
 	"""	
 	# pretty self explanatoy
 	unique_ID = raw_input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
+	unique_ID = unique_ID.strip()
+	print unique_ID
+	if not unique_ID.isalnum():
+		print( "Only letters and numbers are valid characters, please try again.")
+		get_ID()
 	return unique_ID
 
 def display_action_menu(action_list):

@@ -31,19 +31,28 @@ action_table = {
 				'delete':delete_entry,
 				'quit':quitter }
 
+
+for actions in range(0,len(action_list)):
+	action_list[actions][2] = action_table[action_list[actions][0]]
+
+def display(aTab): 
+	print ('Current Fields:')
+	for field in aTab.keys():
+		print( '\t%s' % str(field))
+	
+
+display(action_table)
+
+#print [x[1] for x in action_list]
+"""
+#   ~-~-~-~-~  Exception testing ~-~-~-~-~
 class PoorChoice: pass
 
 def raises_PoorChoice():
 	raise PoorChoice
 
-for actions in range(0,len(action_list)):
-	action_list[actions][2] = action_table[action_list[actions][0]]
-	
-#print action_list
-
-#print [x[1] for x in action_list]
-
 try: 
 	raises_PoorChoice()
 except PoorChoice:
 	print 'exception caught'
+"""

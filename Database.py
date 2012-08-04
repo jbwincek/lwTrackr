@@ -11,6 +11,14 @@ class Database(dict):
 		pass
 	
 	# user related methods
+	def user_exists(unique_ID):
+		# check to see if unique_ID is already a user
+		try:
+			self[unique_ID]
+			return True
+		except KeyError:
+			return False
+
 	def add_user(): 
 		#get the user name to add from the wrapper
 		unique_ID = wrapper.add_user()
@@ -44,25 +52,20 @@ class Database(dict):
 	def interact_with_field(unique_ID): 
 		field_actions = {
 						'add' : self.add_an_entry,
-						'delete' : self.delete_an_entry
+						'delete' : self.delete_an_entry,
 						'modify' : self.modify_an_entry
 						}
 		#get the which action and which field from the wrapper
-		action, field =  wrapper.interact_with_field(unique_ID,field_actions.keys()):
+		(action, field) =  wrapper.interact_with_field(unique_ID,field_actions.keys())
 		#call the specified action passing in the unique_ID and the field.
 		field_actions[action](unique_ID,field)
 		pass
 	
 	#field interactions
 	def add_an_entry(unique_ID,field): 
-		#get the value and label from the wrapper
+		"""add_an_entry(unique_ID,field) add an value to the specified field"""
 		value, label = wrapper.add_an_entry(unique_ID,field)
-		try:
-			self[unique_ID][field].appendEntry(value,label)
-		except InvalidInput: 
-		
-		#use the data
-		pass
+		self[unique_ID][field].appendEntry(value,label)
 	
 	def delete_an_entry(unique_ID,field): 
 		#get which entry to delete from the wrapper
@@ -75,10 +78,6 @@ class Database(dict):
 		pass
 	
 	def display_all():
-		#this method is pending review as to it's nessecity
-		
-	
-	
-	
-	
-	
+		# (8/1) this method is pending review as to it's necessity
+		# (8/4) it is T.T
+		wrapper.list_current_fields(unique_ID,self[unique_ID])

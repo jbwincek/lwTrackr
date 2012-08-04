@@ -24,7 +24,7 @@ Plan:
   Methods intended for internal use begin with a _. Example: _clean()
 """
 
-# user related methods
+#   ~-~=~-~=~-~=~-~=~-~=~-~=~-~  user related methods  ~-~~=~-~=~-~=~-~=~-~=~-~=~-~=~-~
 def add_user(): 
 	"""
 	* Display that we are adding a user
@@ -53,7 +53,7 @@ def delete_user():
 	unique_ID =  _prompt(message)
 	return unique_ID
 
-#field related methods
+#   ~-~=~-~=~-~=~-~=~-~=~-~=~-~=~  field related methods  ~-~~=~-~=~-~=~-~=~-~=~-~=~-~
 def create_new_field(unique_ID): 
 	"""
 	get the field name from the wrapper
@@ -106,9 +106,9 @@ def interact_with_field(unique_ID,actions):
 		action_message['body'].append("\n\t%s" % action)
 	field_name = _prompt(field_message)
 	action = _prompt(action_message)
-	return action, field_name
+	return (action, field_name)
 
-#field interactions
+#   ~-~=~-~=~-~=~-~=~-~=~-~=~-~=~  value related methods  ~-~~=~-~=~-~=~-~=~-~=~-~=~-~
 def add_an_entry(unique_ID,field): 
 	# present the UI to the user to retrieve value and label
 	value_message = {
@@ -166,7 +166,8 @@ def evaluate_action(action,unique_ID):
 #general public methods
 
 def display_error(reason):
-	
+	#Evaluate if this method is still needed (8/4)
+	pass
 
 # ~-~-~-~ private methods 
 
@@ -174,17 +175,22 @@ def _clean(unclean, type, tries, message ):
 	# parse unclean until it's consistently clean
 	# can raise an InvalidInput error if it's unparsable. 
 	
-	# ~-~ UNFINISHED as of 8/1 ~-~ 
-	
+	# ~-~ UNFINISHED as of 8/4 ~-~ 
+	# currently the cleaning is not assuredly hardened
+	unclean = unclean.strip()
 	# strip out all non alphanumeric characters besides '.'
+	parts = unclean.partition('.')
+	if not (parts[0].isalnum() and parts.isalnum()):
+		# called if there is any non alpha numeric besides a single period
+		_nasty_input( unclean, type, tries, message)
 	
 	# try to convert to the right type, handle failures gracefully 
 	try: 
 		if type == 'int':
 			cleaned = int(unclean)
-		else if type == 'string': 
+		elif type == 'string': 
 			cleaned = string(unclean)
-		else if type = 'float':
+		elif type == 'float':
 			cleaned = float(unclean)
 	except ValueError:
 		_nasty_input( unclean, type, tries, message)
@@ -222,11 +228,16 @@ def _nasty_input( unclean, type, tries, message):
 	tries : the remaining number of tries to prompt the user 
 	"""
 	#planned: better explanation of error
-
+	
 	# print why this function was called
 	print( "Unfortuanately that input is not valid because '%s' is not a %s." + 
 			"You have %d more tries to enter a valid input" % (unclean, type, tries)) 
+
+	#planned: add a yes/no question asking the user if they want to try again
+
 	# call prompt again with tries decremented 
 	_prompt( message, tries-1)
 	
-	
+def _yes_no(message):
+	# planned: ask the user the message, clean the entered answer and return a boolean
+	pass

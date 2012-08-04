@@ -16,12 +16,14 @@ action_list follows the format:
   
 """
 import tracker_wrapper as CLI, Database as db
+import sys
 
 versionNumber = '1.0.0'
 
 def func(): pass
+# Field actions 
 action_list = [
-['display_all', 'Display all the entries', func ],
+['display_all', 'Display all the fields', func ],
 ['add', 'Add a new entry', func ],
 ['modify', 'Modify an existing entry', func],
 ['delete', 'Delete an entry', func ],
@@ -29,19 +31,24 @@ action_list = [
 ]
 
 
-def launch(action_list):
+def launch():
 	running = True 
-	database = db.Database(action_list)
+	database = db.Database()
 	CLI.greeting(versionNumber)
 	unique_ID = CLI.get_ID()
-	if database.user_exists(unique_ID):
-		print "welcome back"
-	else:
-		print "greetings new user"
-	CLI.display_action_menu(action_list)
-	action = CLI.get_action(action_list)
+	print repr(unique_ID)
+	try:
+		if database.user_exists(unique_ID):
+			print "welcome back"
+		else:
+			print "greetings new user"
+	except TypeError:
+		# I have no idea why user_exists(unique_ID) throws a type error
+		pass
+	while running:
+		sys.cls
+		CLI.display_action_menu(action_list)
+		action = CLI.get_action(action_list)
 	#database.build_action_table(order)
 	#db.CLI.evaluate_action(action,unique_ID,order)
-
-
-launch(action_list)
+launch()
