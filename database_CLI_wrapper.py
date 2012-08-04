@@ -118,7 +118,8 @@ def add_an_entry(unique_ID,field):
 	
 	label_message = {
 				'title' : '~-~-~ ENTER A LABEL ~-~-~',
-				'body' : 'This will be displayed along side the value.\n Blank is an acceptable option.',
+				'body' : 'This will be displayed along side the value.\n' +
+							'Blank is an acceptable option.',
 				'prompt': '>'}
 	
 	value = _prompt(value_message)
@@ -148,7 +149,8 @@ def modify_an_entry(unique_ID,field):
 	
 	label_message = {
 				'title' : '~-~-~ ENTER A LABEL ~-~-~',
-				'body' : 'This will be displayed along side the value.\n Blank is an acceptable option.',
+				'body' : 'This will be displayed along side the value.\n' + 
+						'Blank is an acceptable option.',
 				'prompt': '>'}
 	
 	which = _prompt(which_method)
@@ -166,27 +168,65 @@ def evaluate_action(action,unique_ID):
 def display_error(reason):
 	
 
-#private methods
-def _get_unclean():
-	unique_ID = ''
-	return unique_ID
-	
-def _clean(unclean):
+# ~-~-~-~ private methods 
+
+def _clean(unclean, type, tries, message ):
 	# parse unclean until it's consistently clean
-	# can raise an InvalidInput error if it's unparsable.  
-	cleaned = unclean
+	# can raise an InvalidInput error if it's unparsable. 
+	
+	# ~-~ UNFINISHED as of 8/1 ~-~ 
+	
+	# strip out all non alphanumeric characters besides '.'
+	
+	# try to convert to the right type, handle failures gracefully 
+	try: 
+		if type == 'int':
+			cleaned = int(unclean)
+		else if type == 'string': 
+			cleaned = string(unclean)
+		else if type = 'float':
+			cleaned = float(unclean)
+	except ValueError:
+		_nasty_input( unclean, type, tries, message)
+			
 	return cleaned
 	
-def _prompt(message):
+def _prompt( message, tries = 3):
 	""" Display the message with consistent formatting.
+	_prompt(message)
+		message contains all the needed display strings as a dictionary
+		Currently utilizes these keys:
+				'title' : the title of the message 
+				'body' : the body of the message
+				'prompt' : the prompt to display before the user input
+				
+				'type' : the expected type of the variable 
+						 currently implemented type options are:
+						 	 'string', 'float' and 'int'
+			
 	Format:
 	
 	The Title Goes Here
 		 Tab over for the body
 	Prompt
 	
-	 Returns 
+	 Returns cleaned input of the specified type
 	 """
-	print( '%s\n\t%s' % (message['title'], message['body']))
-	return _clean(raw_input( message['prompt']))
+	print( '%s\n\t%s' %( message['title'], message['body']))
+	return _clean(raw_input( message['prompt']), message['type'], tries, message)
+	
+def _nasty_input( unclean, type, tries, message):
+	"""_nasty_input(unclean,type,tries) deals with uncleanable input.
+	unclean : the input that failed cleaning
+	type : the expected type 
+	tries : the remaining number of tries to prompt the user 
+	"""
+	#planned: better explanation of error
+
+	# print why this function was called
+	print( "Unfortuanately that input is not valid because '%s' is not a %s." + 
+			"You have %d more tries to enter a valid input" % (unclean, type, tries)) 
+	# call prompt again with tries decremented 
+	_prompt( message, tries-1)
+	
 	
