@@ -76,7 +76,7 @@ def list_current_fields(unique_ID, fields):
 
 	for field in fields: 
 		display_text.append(str(field) + '\n\t')
-	print display_text
+	print(display_text)
 	return
 
 def delete_field(unique_ID): 
@@ -160,7 +160,7 @@ def modify_an_entry(unique_ID,field):
 	return index, value, label
 	
 	
-def evaluate_action(action,unique_ID):
+def evaluate_action(action, unique_ID):
 	print (" %s choosen for user %s" % (action,unique_ID))
 
 #general public methods

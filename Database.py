@@ -13,6 +13,7 @@ class Database(dict):
 	# user related methods
 	def user_exists(unique_ID):
 		# check to see if unique_ID is already a user
+		#could be reimplemented as self.get(unique_ID, False)
 		try:
 			self[unique_ID]
 			return True

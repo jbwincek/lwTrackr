@@ -53,7 +53,7 @@ if function names in Database.py change, be sure to update the
 
 import pydoc
 
-def PoorChoice():
+class PoorChoice(Exception):
 	# except for dealing with poor choices 
 	def __init__(self, attempted_text, reason):
 		self.attempted_text = attempted_text
@@ -76,11 +76,11 @@ def get_ID():
   	  * returns their input exactly without any cleaning
 	"""	
 	# pretty self explanatoy
-	unique_ID = raw_input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
+	unique_ID = input("Please enter your unique user identifier.\n   If you are a new user, pick an ID (a few letters) and enter that.\n   If you are a returning user enter the ID from before.\n: ")
 	unique_ID = unique_ID.strip()
-	print unique_ID
+	print(unique_ID)
 	if not unique_ID.isalnum():
-		print( "Only letters and numbers are valid characters, please try again.")
+		print("Only letters and numbers are valid characters, please try again.")
 		get_ID()
 	return unique_ID
 
@@ -96,8 +96,8 @@ def display_action_menu(action_list):
 		display_action_menu_item(print_list[i],i)
 		
 
-def display_action_menu_item(description,action_number):
-	print ( '   %d.)  %s.' % (action_number, description))
+def display_action_menu_item(description, action_number):
+	print( '   %d.)  %s.' % (action_number, description))
 
 
 def get_action(action_list):
@@ -106,11 +106,11 @@ def get_action(action_list):
 	The prompt is very short because display_action_menu() builds most of the actual prompt 
 	parse_input_from() returns the action as an integer corresponding to the index of the action
 	"""
-	unclean_action = raw_input(": ")
+	unclean_action = input(": ")
 	try:
 		action = parse_input_from(unclean_action,action_list)
-	except PoorChoice,PC:
-		deal_with_poor_choice(PC.attempted_text,PC.reason)
+	except PoorChoice as PC:
+		action = deal_with_poor_choice(PC.attempted_text, PC.reason, action_list)
 	return action
 
 def parse_input_from(unclean_action, action_list): 
@@ -127,17 +127,18 @@ def parse_input_from(unclean_action, action_list):
 	if cleaning_action.isdigit():
 		if int(cleaning_action) > len(action_list) or int(cleaning_action) < 0:
 			# out of bounds check
-			raise PoorChoice(unclean_action,'out of bounds')
+			raise PoorChoice(unclean_action, 'out of bounds')
 		else: 
 			# unclean_action has been successfully cleaned
 			cleaned_action = cleaning_action 
 	else:
-		raise PoorChoice(unclean_action,'not a valid option')
+		raise PoorChoice(unclean_action, 'not a valid option')
 	return int(cleaned_action)
 
-def deal_with_poor_choice(attempted_text,reason):
-	print( "%s is %s. Please enter one of the listed numbers." % (attempted_text,reason))
-	get_action(action_text)
+def deal_with_poor_choice(attempted_text, reason, action_list):
+    print( "%s is %s. Please enter one of the listed numbers." % (attempted_text,reason))
+    display_action_menu(action_list)
+    return get_action(action_list)
 
 def action_converter(int_action, action_list):
 	"""
@@ -147,7 +148,7 @@ def action_converter(int_action, action_list):
 	"""
 	return action_list[int(int_action)][0]
 	
-def build_action_table(action,order):
+def build_action_table(action, order):
 	"""
 	accepts a clean well formatted action integer 
 	Then calls the appropriate database function	
