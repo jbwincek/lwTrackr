@@ -1,0 +1,14 @@
+todo list:
+[ ] Implement Database Saving
+[ ] Add more items to the action_list in tracker.py 
+[ ] Two column action menu list
+    [ ] add padding to display_action_menu_item in tracker_wrapper.py line 101
+    [ ] implement and make sure numbering stays right
+[ ] Check all documenation for currency
+    [ ] tracker.py
+    [ ] tracker_wrapper.py
+    [ ] database_CLI_wrapper.py
+    [ ] Database.py
+    [ ] Field.py 
+    [ ] tacker_flow_control_outline.txt
+    [ ] 

@@ -5,52 +5,54 @@ The Database class is based off of a dictionary and contains all the methods
 import database_CLI_wrapper as wrapper
 import Field
 
+
 class Database(dict):
 
 	def __init__(self):
 		pass
 	
 	# user related methods
-	def user_exists(unique_ID):
+	def user_exists(self, unique_ID):
 		# check to see if unique_ID is already a user
-		#could be reimplemented as self.get(unique_ID, False)
+		# could be reimplemented as self.get(unique_ID, False)
 		try:
 			self[unique_ID]
 			return True
 		except KeyError:
 			return False
 
-	def add_user(): 
+	def add_user(self, unique_ID = None): 
 		#get the user name to add from the wrapper
-		unique_ID = wrapper.add_user()
+		if not unique_ID:
+			unique_ID = wrapper.add_user()
 		#create an entry with that username
 		self[unique_ID] = {}
 	
-	def delete_user(): 
+	def delete_user(self): 
 		#get the user name to delete from the wrapper
 		unique_ID = wrapper.delete_user()
 		#use the data
 		del self[unique_ID]
 	
 	#field related methods
-	def create_new_field(unique_ID): 
+	def create_new_field(self, unique_ID): 
 		#get the field name from the wrapper
 		field_name = wrapper.create_new_field()
 		#creates an instance of the Field class in unique_ID's storage area. 
 		self[unique_ID][field_name] = Field()
 	
-	def list_current_fields(unique_ID): 
+	def list_current_fields(self, unique_ID): 
 		#list all fields that exist in unique_ID's storage area.
-		wrapper.list_current_fields( unique_ID, self[unique_ID]) 
+		wrapper.list_current_fields(unique_ID, self[unique_ID]) 
 		pass
 	
-	def delete_field(unique_ID): 
+	def delete_field(self, unique_ID): 
 		#get which field to delete from the wrapper
 		field_name = wrapper.delete_field(unique_ID)
 		#remove the specified field from unique_ID's storage area. 
 		del self[unique_ID][field_name]
 	
-	def interact_with_field(unique_ID): 
+	def interact_with_field(self, unique_ID): 
 		field_actions = {
 						'add' : self.add_an_entry,
 						'delete' : self.delete_an_entry,
@@ -63,22 +65,22 @@ class Database(dict):
 		pass
 	
 	#field interactions
-	def add_an_entry(unique_ID,field): 
+	def add_an_entry(self, unique_ID, field): 
 		"""add_an_entry(unique_ID,field) add an value to the specified field"""
 		value, label = wrapper.add_an_entry(unique_ID,field)
 		self[unique_ID][field].appendEntry(value,label)
 	
-	def delete_an_entry(unique_ID,field): 
+	def delete_an_entry(self, unique_ID, field): 
 		#get which entry to delete from the wrapper
 		#use the data
 		pass
 	
-	def modify_an_entry(unique_ID,field): 
+	def modify_an_entry(self, unique_ID, field): 
 		#get the new value, label, and which entry to modify from the wrapper
 		#use the data
 		pass
 	
-	def display_all():
+	def display_all(self):
 		# (8/1) this method is pending review as to it's necessity
 		# (8/4) it is T.T
 		wrapper.list_current_fields(unique_ID,self[unique_ID])
