@@ -17,3 +17,7 @@ tracker.py
 projects
 
 Field.pyc
+
+*.pyc
+
+.DS_Store
