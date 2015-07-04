@@ -1,18 +1,20 @@
 todo list:
 [ ] Implement Database Saving
-    [ ] pick file type (json?)
-    [ ] decide if it needs to be encrypted / hashed
+    [x] pick file type = json
+    [ ] check if there are json errors when serializing namedtuples
+    [x] decide if it needs to be encrypted / hashed
+        [x] no to both
     [ ] database loading
         [ ] database bad parsing handling (in case file got changed since last)
     [ ] database saving 
+[ ] Database as API rewrite
+    [ ] Documentation
+    [ ] Skeleton procedures 
 [ ] Add more items to the action_list in tracker.py
-    [x] Field actions
-        [x] create 
-        [x] list 
-        [x] delete 
-    [ ] User actions
-        [x] add
-        [x] delete  
+    [ ] Field actions
+        [ ] create 
+        [ ] list 
+        [ ] delete  
     [ ] Entry actions
         [ ] create 
         [ ] list 
@@ -23,24 +25,15 @@ todo list:
         [ ] create 
         [ ] list 
         [ ] delete 
-    [ ] User actions
-        [ ] add
-        [ ] delete  
-    [ ] Entry actions
+     [ ] Entry actions
         [ ] create 
         [ ] list 
         [ ] delete
         [ ] modify 
-    [x] Quit
-[ ] Two column action menu list
-    [x] add padding to display_action_menu_item in tracker_wrapper.py line 101
-        [ ] check padding width (currently 35) when second column is displayed
-    [ ] implement and make sure numbering stays right
+    [ ] Quit
 [ ] Check all documenation for currency
     [ ] tracker.py
-    [ ] tracker_wrapper.py
-    [ ] database_CLI_wrapper.py
     [ ] Database.py
-    [ ] Field.py 
-    [ ] tacker_flow_control_outline.txt
-[ ] Ruminate on the utlity of having such ad hoc decentralized input/output code
+    [x] tacker_flow_control_outline.txt
+[x] Ruminate on the utlity of having such ad hoc decentralized input/output code
+[ ] Keep naming consistent throughout: procudures do stuff, functions return stuff

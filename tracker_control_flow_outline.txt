@@ -1,76 +1,11 @@
 Tracker control flow outline 
 
-  Psuedo code to describe the highest level 
+Psuedo code to describe the highest level 
+
 Launch:
 	intro messages
-	prompt user for unique identifier 
-		if the user already exist: pass
-		else: 
-			add a new entry to the database
-			tell the user a new entry has been added
-	prompt the user for actions they would like to do 
-		start a while loop that is broken out of on valid data entry
-			if they choose display action: 
-				call the display function for their database entry
-				then break
-			if they choose add action:
-				call the add  an entry function for their database entry
-				then break
-			if they choose the modify action:
-				call the modify an entry function for their database entry
-				then break
-			other wise deal with their bad input data entry 
-			
-
-  This treats the database as a dictionary 		
-Tracker control flow outline
-Launch():
-	open_database()
-	print (greeting())
-	input(unique_ID)
-	if !user_database[unique_ID]:
-		user_database[unique_ID] = user.new()
-		print(sucessful_user_add())
-	input(action):
-		while running:
-			print( action_menu())
-			if action == display:
-				print( str( user_database[unique_ID]))
-			else if action == add: 
-				user_database[unique_ID].add_entry()
-			else if action == modify:
-				user_database[unique_ID].modify_entry()
-			else if action == exit: 
-				exit_operations()
-			else:
-				deal_with_poor_choice()				
-	close_database()
-
-  This abstracts the database away behind a class (OOP)
-Tracker control flow outline
-Launch():
-	database = Database()
-	database.load(<filename>)
-	greeting()
-	unique_ID = get_ID()
-	if not database.user_exists(unique_ID):
-		database.add_user(unique_ID)
-	while running:
-		display_action_menu()
-		action = get_action():
-		while True:
-			if action == 'display':
-				database.display(unique_ID)
-			else if action == 'add': 
-				database.add_entry(unique_ID)
-			else if action == 'modify':
-				database.modify_entry(unique_ID)
-			else if action == 'delete':
-				database.delete_entry(unique_ID)
-			else if action == 'exit': 
-				break
-			else:
-				deal_with_poor_choice()				
-	database.close()
-	close_application()
-				
+	drop into running loop
+		display possible commands
+		wait for command
+		excute command 
+		
