@@ -28,16 +28,17 @@ def func(): pass
 
 def launch():
 	running = True 
-	# test
 	database = db.Database()
 	CLI.greeting(versionNumber)
 	unique_ID = CLI.get_ID()
 	action_list = [
-				   ['display_all', 'Display all the fields', database.list_current_fields],
-				   ['add', 'Add a new entry', database.add_user],
-				   ['modify', 'Modify an existing entry', func],
-				   ['delete', 'Delete an entry', func ],
-				   ['quit', 'Quit the program', func ]]
+	               ['add_user', 'Add a new user', database.add_user],
+	               ['delete_user','Delete a current user', database.delete_user],
+				   ['list_fields', 'Display all the fields', database.list_current_fields],
+				   ['create_field', 'Create a new field', database.create_new_field],
+				   ['delete_field', 'Delete an existing field', database.delete_field],
+				   ['entry_interactions', 'create/delete/modify a field entry', database.interact_with_field],
+				   ['quit', 'Quit the program', quit ]]
 
 	print(repr(unique_ID))
 	try:
@@ -45,7 +46,8 @@ def launch():
 			print("welcome back")
 		else:
 			print("greetings new user")
-			action_list[1][2](unique_ID)
+			# add user to dabase
+			action_list[0][2](unique_ID)
 	except TypeError:
 		# I have no idea why user_exists(unique_ID) throws a type error
 		pass

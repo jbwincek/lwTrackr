@@ -1,0 +1,21 @@
+How would I do a rewrite
+    * only one user
+    * Fields, as lists of named tuples
+    * unified way for interacting with things 
+    * less spaghetti code
+        * write the database as a well specified API that the wrappers implement
+            * database should only deal with interacting with itself
+                * is it even needed
+            * database farming work out to the wrapper inverts the modularity and
+              creates codependence
+    * Action system: 
+        * CLI wrapper based actions should be a result of what's implemented in 
+          the database. 
+    * feature creep potential items 
+        * would be really cool if fields could be arbitrary 
+        * decorators for CLI based wrapper? 
+
+Database layout: 
+    Field: [the time, the data, an additional label] 
+    Field:
+    Field:

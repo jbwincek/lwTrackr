@@ -99,7 +99,7 @@ def display_action_menu(action_list):
         
 
 def display_action_menu_item(description, action_number):
-    print( '   %d.)  %s.' % (action_number, description))
+    print('   {0}.)  {1}.'.format(action_number, description).ljust(35))
 
 
 def get_action(action_list):

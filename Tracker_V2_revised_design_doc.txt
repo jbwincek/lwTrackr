@@ -1,0 +1,26 @@
+Tracker V2 revised design doc
+
+* Database as an API
+    * Well documented, in a module, independent
+    * Design goals:
+         * Consistent method names
+         * Keyword arguments
+         * Consistent return values as named tuples
+* Wrappers as decorators
+    * One generic decorator for each function, so then switching out how the database interface is implemented only takes a few lines in the main decorator.
+    * Wrappers handle all input and output, then hand off and receive cleaned data to the Database.
+    * Bad data handling happens in wrappers
+        * Show error message
+        * Drop user back to the most recent menu
+        * Let them renter the command and data again.
+    * CLI wrapper menu and action system
+        * All actions available always
+        * One unified action parser
+        * Actions as two letter commands, or full words
+        * c create, m modify, d delete
+        * u user, f field, e entry
+        * h help <command>
+        * Ex: c e for create entry
+    * Confirm before deletions
+
+evernote version: https://www.evernote.com/l/AOOmaL_lLA5KFpBQPn4-Ow8dvNDZG08TgdU

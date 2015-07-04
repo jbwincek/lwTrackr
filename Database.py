@@ -28,7 +28,7 @@ class Database(dict):
 		#create an entry with that username
 		self[unique_ID] = {}
 	
-	def delete_user(self): 
+	def delete_user(self, unique_ID = None): 
 		#get the user name to delete from the wrapper
 		unique_ID = wrapper.delete_user()
 		#use the data

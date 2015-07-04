@@ -222,7 +222,7 @@ def _prompt( message, tries = 3):
      Returns cleaned input of the specified type
      """
     print( '%s\n\t%s' %( message['title'], message['body']))
-    return _clean(raw_input( message['prompt']), message['type'], tries, message)
+    return _clean(input( message['prompt']), message['type'], tries, message)
     
 def _nasty_input( unclean, type, tries, message):
     """_nasty_input(unclean,type,tries) deals with uncleanable input.
