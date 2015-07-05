@@ -10,6 +10,7 @@ todo list:
 [ ] Database as API rewrite
     [ ] Documentation
     [ ] Skeleton procedures 
+    [ ] Think about if it makes sense to do save/load in the database or outside of it
 [ ] Add more items to the action_list in tracker.py
     [ ] Field actions
         [ ] create 
