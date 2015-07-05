@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ A database for storing lists of generic data fields. """
 from collections import abc
 
@@ -32,9 +33,9 @@ class Database(abc.MutableMapping):
         except AttributeError:
             raise KeyError('Key not a valid string')
         if entry_number is not None:
-            return self.fields[field_name][int(entry_number)]
+            return self.fields.get(field_name)[int(entry_number)]
         else:
-            return self.fields[field_name]
+            return self.fields.get(field_name)
 
     def __setitem__(self, item = None, value = None):
         """"Set either the field or entry specified to value. 
@@ -44,10 +45,10 @@ class Database(abc.MutableMapping):
                 value: should be either a list –– either empty or of well formed
                        namedtuples –– or a namedtuple in the appropriate format
                        for the given field.
-            Usage:
-
             Errors:  
-
+                KeyError: if field_name does convert neatly into a possible
+                          dictionary key.
+                IndexError: if the entry_number is out of bounds 
             """
         try:
             field_name, entry_number = item.split('.')
@@ -62,8 +63,26 @@ class Database(abc.MutableMapping):
         else:
             self.fields[field_name] = value 
 
-    def __delitem__(self, field_name = None):
-        del self.fields[field_name]
+    def __delitem__(self, item = None):
+        """ Delete either the field or entry specified. 
+            Arguments:
+                item: expects a string either as a field_name key, or a
+                      field_name dotted with an entry number.
+        """
+        try:
+            field_name, entry_number = item.split('.')
+        except ValueError:
+            # if statement disguised as exception handling 
+            field_name = item
+            entry_number = None 
+        except AttributeError:
+            raise KeyError('Key not a valid string')
+        if entry_number is not None:
+            self.fields[field_name].pop(int(entry_number))
+        else:
+            #this may be redudant
+            self.fields[field_name].clear()
+            del self.fields[field_name]
 
     def __iter__(self, *, field_name = None):
         if field_name is None: 
@@ -88,7 +107,10 @@ class Database(abc.MutableMapping):
                 field_name [string] : used to specify fields
                 data_fields [list of strings] : specifies what the field should track
             EFFECTS: 
-                adds a field to the internal dictionary"""    
+                adds a field to the internal dictionary
+            """
+        if field_name is not None:
+            self.fields[field_name] = data_fields    
         pass
 
     def delete_field(self,):
@@ -103,13 +125,10 @@ class Database(abc.MutableMapping):
     def add_entry(self,):
         pass
 
-    def modify_entry(self,):
-        pass
-
     def delete_entry(self,):
         pass
-
-    def iter_entries(self,):
+    
+    def modify_entry(self,):
         pass
 
     def save(self,):
