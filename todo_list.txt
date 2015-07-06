@@ -9,6 +9,7 @@ todo list:
     [ ] database saving 
 [ ] Database as API rewrite
     [ ] Documentation
+        [ ] Make type specification consistent throughout
     [x] Skeleton procedures/functions
     [x] Think about if it makes sense to do save/load in the database or outside
         of it. It does, saving/loading in the database keeps the details 
@@ -24,10 +25,8 @@ todo list:
             [x] __iter__
             [x] __len__
             [x] add_field
-            [ ] delete_field
+            [x] delete_field
             [ ] modify_field
-            [ ] construct_field_entry
-                [ ] contemplate whether this is needed
             [ ] add_entry
             [ ] delete_entry
             [ ] modify_entry
@@ -38,14 +37,13 @@ todo list:
             [x] __getitem__
             [x] __setitem__
             [x] __delitem__
-            [ ] __iter__
+            [x] __iter__
             [x] __len__
             [x] add_field
-            [ ] delete_field
-            [ ] modify_field
-            [ ] construct_field_entry
-            [ ] add_entry
-            [ ] delete_entry
+            [x] delete_field
+            [x] modify_field
+            [x] add_entry
+            [x] delete_entry
             [ ] modify_entry
             [ ] save
             [ ] load
@@ -59,7 +57,6 @@ todo list:
             [ ] add_field
             [ ] delete_field
             [ ] modify_field
-            [ ] construct_field_entry
             [ ] add_entry
             [ ] delete_entry
             [ ] modify_entry

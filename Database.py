@@ -85,6 +85,7 @@ class Database(abc.MutableMapping):
             del self.fields[field_name]
 
     def __iter__(self, *, field_name = None):
+        """Iterate through all the entries in all or the specified field. """
         if field_name is None: 
             for field in self.fields.values():
                 yield from field
@@ -100,32 +101,72 @@ class Database(abc.MutableMapping):
         return total 
 
 
-    def add_field(self, *, field_name = None, data_fields = []):
-        """create a field in the database with field_name as the name, 
-           and data_fields as the slots in the named tuple
+    def add_field(self, *, field_name = None, data_fields = None):
+        """Create a field in the database with field_name as the name, 
+           and data_fields as the slots in the named tuple.
            Keyword Arguments: 
                 field_name [string] : used to specify fields
                 data_fields [list of strings] : specifies what the field should track
-            EFFECTS: 
+            Effects: 
                 adds a field to the internal dictionary
+                updates dictionary with [field_name]_tuple to include a list of 
+                    data fields this field tracks. Used for when adding entries 
+                    to the field. 
             """
-        if field_name is not None:
-            self.fields[field_name] = data_fields    
+        if field_name is not None and data_fields is not None:
+            self.fields[field_name] = [] 
+            Field = namedtuple('Field', data_fields)
+            self.fields[field_name+'_tuple'].append(Field)   
         pass
 
-    def delete_field(self,):
+    def delete_field(self, field_name = None):
+        """Deletes specified field."""
+        del self.fields[field_name]
+
+    def modify_field(self, field_name = None, data_fields = None, rewrite = False):
+        """Modifies what a field tracks.
+            Keyword Arguments: 
+                field_name [string] : used to specify in which field to modify
+                data_fields [list of strings] : the new list of things the field
+                                                should track.
+                rewrite [boolean] : whether to erase and start afresh with the 
+                                    field, or just switch to using new data 
+                                    fields from this point forward.
+            Effects: 
+                changes specified field to track new data
+                if rewrite is True, it will erase all the existing entries in 
+                    the specified field, use with caution. 
+        """
         pass
 
-    def modify_field(self,):
+    def add_entry(self, *, field_name = None, index = None, **kwargs):
+        """Add an entry using kawgs as the data_fields.
+            Keyword Arguments:
+                field_name [string] : used to specify in which field to add the 
+                                      entry to. 
+                index [int] : if specified it will insert the entry at index,
+                              otherwise it will append to the end of the list.
+                kwargs : must be valid data field names.
+            Effects:
+                adds an entry to the specified field
+            Errors:
+                AttributeError if kwargs don't match up perfectly to the data_fields
+                KeyError if field_name is not actually a field
+                IndexError if the index is out of the bounds of the list
+        """
         pass
 
-    def construct_field_entry(self,):
-        pass
-
-    def add_entry(self,):
-        pass
-
-    def delete_entry(self,):
+    def delete_entry(self, *, field_name = None, index = None):
+        """ Delete the entry at index in field_name
+            Keyword Arguments:
+                field_name [string] : used to specify in which field to delete
+                index [int] : the index of the entry to delete 
+            Effects:
+                deletes the specifed entry
+            Errors:
+                KeyError if field_name is not actually a field
+                IndexError if the index is out of the bounds of the list
+        """"
         pass
     
     def modify_entry(self,):
